@@ -1,0 +1,1270 @@
+function BlockGenerator.set 1
+push constant 0
+pop local 0
+push constant 7
+call Array.new 1
+pop static 2
+push constant 9
+call Array.new 1
+pop static 1
+push constant 9
+call Array.new 1
+pop static 0
+label WHILE_EXP0
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END0
+push local 0
+push static 2
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push static 0
+add
+push constant 16
+call Array.new 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 7
+push static 0
+add
+push constant 16
+call Array.new 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push static 0
+add
+push constant 16
+call Array.new 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function BlockGenerator.copy_plate 3
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 1
+push local 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 2
+label WHILE_EXP1
+push local 1
+push constant 16
+lt
+not
+if-goto WHILE_END1
+push local 1
+push local 2
+add
+push local 0
+push local 1
+call World.get_plate 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function BlockGenerator.init 5
+call BlockGenerator.copy_plate 0
+pop temp 0
+push constant 0
+pop local 0
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END0
+push local 0
+push static 2
+add
+pop pointer 1
+push that 0
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 2
+push constant 1
+add
+pop local 2
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 0
+label WHILE_EXP1
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END1
+push local 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 4
+push constant 0
+pop local 1
+push local 0
+push static 1
+add
+push constant 1
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label WHILE_EXP2
+push local 1
+push constant 16
+lt
+not
+if-goto WHILE_END2
+push local 1
+push local 4
+add
+pop pointer 1
+push that 0
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push static 1
+add
+push local 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_FALSE1
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP2
+label WHILE_END2
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+pop local 0
+call BlockGenerator.limit 0
+pop local 3
+push local 3
+push constant 2
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 2
+pop local 3
+label IF_FALSE2
+push local 3
+push constant 6
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 6
+pop local 3
+label IF_FALSE3
+push local 2
+push local 3
+push constant 2
+call Math.divide 2
+push constant 1
+add
+gt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+label WHILE_EXP3
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END3
+push local 0
+push static 2
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP3
+label WHILE_END3
+label IF_FALSE4
+push constant 0
+return
+function BlockGenerator.limit 2
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END0
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+pop local 1
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 1
+push constant 2
+call Math.divide 2
+push constant 0
+call World.addscore 1
+push local 1
+push local 1
+call Math.multiply 2
+push constant 1
+call Math.max 2
+call Math.divide 2
+sub
+call World.get_line 0
+sub
+return
+function BlockGenerator.make_block 5
+push constant 0
+pop local 0
+push constant 10000
+neg
+pop local 1
+call BlockGenerator.init 0
+pop temp 0
+label WHILE_EXP0
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END0
+push local 0
+push static 2
+add
+pop pointer 1
+push that 0
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 0
+call BlockGenerator.check_line 1
+pop local 4
+push local 0
+call BlockGenerator.get_height 1
+pop local 3
+push local 4
+push constant 100
+neg
+call Math.multiply 2
+push local 3
+add
+push local 1
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 4
+push constant 100
+neg
+call Math.multiply 2
+push local 3
+add
+pop local 1
+push local 0
+pop local 2
+label IF_FALSE1
+label IF_FALSE0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+push static 2
+add
+push constant 0
+not
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+return
+function BlockGenerator.get_height 2
+push constant 0
+pop local 0
+push constant 100
+pop local 1
+push argument 0
+push constant 0
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+label WHILE_EXP0
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END0
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+call Math.max 2
+push constant 2
+add
+push local 1
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push local 1
+return
+label IF_FALSE0
+push argument 0
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+label WHILE_EXP1
+push local 0
+push constant 6
+lt
+not
+if-goto WHILE_END1
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push local 0
+push constant 3
+add
+push static 1
+add
+pop pointer 1
+push that 0
+call Math.max 2
+call Math.max 2
+push constant 1
+add
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push constant 0
+pop local 0
+label WHILE_EXP2
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END2
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 4
+add
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP2
+label WHILE_END2
+push local 1
+return
+label IF_FALSE1
+push argument 0
+push constant 2
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+label WHILE_EXP3
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END3
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP3
+label WHILE_END3
+push constant 0
+pop local 0
+label WHILE_EXP4
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END4
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP4
+label WHILE_END4
+push local 1
+return
+label IF_FALSE2
+push argument 0
+push constant 3
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+label WHILE_EXP5
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END5
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP5
+label WHILE_END5
+push constant 0
+pop local 0
+label WHILE_EXP6
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END6
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP6
+label WHILE_END6
+push local 1
+return
+label IF_FALSE3
+push argument 0
+push constant 4
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+label WHILE_EXP7
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END7
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP7
+label WHILE_END7
+push constant 0
+pop local 0
+label WHILE_EXP8
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END8
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP8
+label WHILE_END8
+push local 1
+return
+label IF_FALSE4
+push argument 0
+push constant 5
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+label WHILE_EXP9
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END9
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP9
+label WHILE_END9
+push constant 0
+pop local 0
+label WHILE_EXP10
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END10
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP10
+label WHILE_END10
+push local 1
+return
+label IF_FALSE5
+push argument 0
+push constant 6
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+label WHILE_EXP11
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END11
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP11
+label WHILE_END11
+push constant 0
+pop local 0
+label WHILE_EXP12
+push local 0
+push constant 8
+lt
+not
+if-goto WHILE_END12
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 3
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP12
+label WHILE_END12
+push constant 0
+pop local 0
+label WHILE_EXP13
+push local 0
+push constant 7
+lt
+not
+if-goto WHILE_END13
+push local 1
+push local 0
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+push local 0
+push constant 1
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 2
+add
+call Math.max 2
+push local 0
+push constant 2
+add
+push static 1
+add
+pop pointer 1
+push that 0
+push constant 1
+add
+call Math.max 2
+call Math.min 2
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP13
+label WHILE_END13
+push local 1
+return
+label IF_FALSE6
+push constant 0
+return
+function BlockGenerator.check_line 5
+push constant 0
+pop local 1
+push constant 1
+pop local 2
+push constant 0
+pop local 3
+label WHILE_EXP0
+push local 3
+push constant 4
+lt
+not
+if-goto WHILE_END0
+label WHILE_EXP1
+push local 2
+push constant 5
+lt
+not
+if-goto WHILE_END1
+push argument 0
+call FakeBlock.new 1
+pop local 0
+push local 0
+call FakeBlock.draw 1
+pop temp 0
+push local 3
+pop local 4
+label WHILE_EXP2
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END2
+push local 0
+call FakeBlock.turn_left 1
+pop temp 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP2
+label WHILE_END2
+push local 0
+push local 2
+call FakeBlock.move_left 2
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+label WHILE_EXP3
+push local 0
+call FakeBlock.move_down 1
+not
+if-goto WHILE_END3
+goto WHILE_EXP3
+label WHILE_END3
+push local 1
+call BlockGenerator.clean_line 0
+call Math.max 2
+pop local 1
+push local 0
+call FakeBlock.erase 1
+pop temp 0
+label IF_FALSE0
+push local 0
+call FakeBlock.decompose 1
+pop temp 0
+push argument 0
+call FakeBlock.new 1
+pop local 0
+push local 0
+call FakeBlock.draw 1
+pop temp 0
+push local 3
+pop local 4
+label WHILE_EXP4
+push local 4
+push constant 0
+gt
+not
+if-goto WHILE_END4
+push local 0
+call FakeBlock.turn_left 1
+pop temp 0
+push local 4
+push constant 1
+sub
+pop local 4
+goto WHILE_EXP4
+label WHILE_END4
+push local 0
+push local 2
+call FakeBlock.move_right 2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+label WHILE_EXP5
+push local 0
+call FakeBlock.move_down 1
+not
+if-goto WHILE_END5
+goto WHILE_EXP5
+label WHILE_END5
+push local 1
+call BlockGenerator.clean_line 0
+call Math.max 2
+pop local 1
+label IF_FALSE1
+push local 0
+call FakeBlock.decompose 1
+pop temp 0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push local 1
+return
+function BlockGenerator.clean_line 5
+push constant 0
+pop local 2
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 16
+lt
+not
+if-goto WHILE_END0
+push constant 0
+pop local 0
+push constant 0
+not
+pop local 4
+label WHILE_EXP1
+push local 0
+push constant 9
+lt
+not
+if-goto WHILE_END1
+push local 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 3
+push local 4
+push local 1
+push local 3
+add
+pop pointer 1
+push that 0
+and
+pop local 4
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP1
+label WHILE_END1
+push local 4
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push local 2
+push constant 1
+add
+pop local 2
+label IF_FALSE0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+return
+function BlockGenerator.put 1
+push argument 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 1
+push local 0
+add
+push constant 0
+not
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function BlockGenerator.remove 1
+push argument 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 1
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function BlockGenerator.board_check 1
+push argument 0
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+return
+label IF_FALSE0
+push argument 0
+push constant 8
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push argument 1
+push constant 0
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+return
+label IF_FALSE2
+push argument 1
+push constant 15
+gt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+return
+label IF_FALSE3
+push argument 0
+push static 0
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 1
+push local 0
+add
+pop pointer 1
+push that 0
+push constant 0
+not
+eq
+push argument 0
+push argument 2
+eq
+push argument 1
+push argument 3
+eq
+and
+not
+and
+push argument 0
+push argument 4
+eq
+push argument 1
+push argument 5
+eq
+and
+not
+and
+push argument 0
+push argument 6
+eq
+push argument 1
+push argument 7
+eq
+and
+not
+and
+push argument 0
+push argument 8
+eq
+push argument 1
+push argument 9
+eq
+and
+not
+and
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+return
+label IF_FALSE4
+push constant 0
+not
+return

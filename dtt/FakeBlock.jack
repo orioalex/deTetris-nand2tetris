@@ -1,0 +1,340 @@
+class FakeBlock{
+    field int types; // O, I, S, Z, L, J, T
+    field int direction; // up: 0, right: 1, down: 2, left: 3
+    field int positionX1,positionY1;
+    field int positionX2,positionY2;
+    field int positionX3,positionY3;
+    field int positionX4,positionY4;
+
+    constructor FakeBlock new(int type){
+        let direction = 0;
+        let types = type;
+        if(type = 0){ //O
+            let positionX1 = 4;
+            let positionY1 = 14;
+            let positionX2 = 5;
+            let positionY2 = 14;
+            let positionX3 = 4;
+            let positionY3 = 15;
+            let positionX4 = 5;
+            let positionY4 = 15;
+        }
+        if(type = 1){ //I
+            let positionX1 = 4;
+            let positionY1 = 12;
+            let positionX2 = 4;
+            let positionY2 = 13;
+            let positionX3 = 4;
+            let positionY3 = 14;
+            let positionX4 = 4;
+            let positionY4 = 15;
+        }
+        if(type = 2){ //S
+            let positionX1 = 4;
+            let positionY1 = 14;
+            let positionX2 = 3;
+            let positionY2 = 14;
+            let positionX3 = 4;
+            let positionY3 = 15;
+            let positionX4 = 5;
+            let positionY4 = 15;
+        }
+        if(type = 3){ //Z
+            let positionX1 = 4;
+            let positionY1 = 14;
+            let positionX2 = 3;
+            let positionY2 = 15;
+            let positionX3 = 4;
+            let positionY3 = 15;
+            let positionX4 = 5;
+            let positionY4 = 14;
+        }
+        if(type = 4){ //L
+            let positionX1 = 4;
+            let positionY1 = 14;
+            let positionX2 = 4;
+            let positionY2 = 13;
+            let positionX3 = 4;
+            let positionY3 = 15;
+            let positionX4 = 5;
+            let positionY4 = 13;
+        }
+        if(type = 5){ //J
+            let positionX1 = 4;
+            let positionY1 = 14;
+            let positionX2 = 4;
+            let positionY2 = 13;
+            let positionX3 = 4;
+            let positionY3 = 15;
+            let positionX4 = 3;
+            let positionY4 = 13;
+        }
+        if(type = 6){ //T
+            let positionX1 = 5;
+            let positionY1 = 14;
+            let positionX2 = 4;
+            let positionY2 = 15;
+            let positionX3 = 5;
+            let positionY3 = 15;
+            let positionX4 = 6;
+            let positionY4 = 15;
+        }
+        return this;
+    }
+    method int get_dir(){
+        return direction;
+    }
+    method int get_type(){
+        return types;
+    }
+    method boolean move_down(){
+        if(~BlockGenerator.board_check(positionX1,positionY1- 1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX2,positionY2- 1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX3,positionY3- 1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX4,positionY4- 1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        do erase();
+        let positionY1 = positionY1 - 1;
+        let positionY2 = positionY2 - 1;
+        let positionY3 = positionY3 - 1;
+        let positionY4 = positionY4 - 1;
+        do draw();
+        return true;
+    }
+    method boolean move_left(int val){
+        if(~BlockGenerator.board_check(positionX1- val,positionY1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX2- val,positionY2,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX3- val,positionY3,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX4- val,positionY4,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        do erase();
+        let positionX1 = positionX1 - val;
+        let positionX2 = positionX2 - val;
+        let positionX3 = positionX3 - val;
+        let positionX4 = positionX4 - val;
+        do draw();
+        return true;
+    }
+    method boolean move_right(int val){
+        if(~BlockGenerator.board_check(positionX1+ val,positionY1,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX2+ val,positionY2,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX3+ val,positionY3,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        if(~BlockGenerator.board_check(positionX4+ val,positionY4,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {return false;}
+        do erase();
+        let positionX1 = positionX1 + val;
+        let positionX2 = positionX2 + val;
+        let positionX3 = positionX3 + val;
+        let positionX4 = positionX4 + val;
+        do draw();
+        return true;
+    }
+    method boolean turn_left(){
+        var int posX,posY;
+        var boolean success;
+        var int findY,findX;
+        var Array tempX,tempY;
+
+        let tempX = Array.new(4);
+        let tempY = Array.new(4);
+        let success = true;
+        let posX = Array.new(3);
+        let posY = Array.new(3);
+
+        let posX[0] = positionX2 - positionX1;
+        let posX[1] = positionX3 - positionX1;
+        let posX[2] = positionX4 - positionX1;
+        let posY[0] = positionY2 - positionY1;
+        let posY[1] = positionY3 - positionY1;
+        let posY[2] = positionY4 - positionY1;
+
+        let tempX[0] = positionX1;
+        let tempX[1] = -posY[0]+positionX1;
+        let tempX[2] = -posY[1]+positionX1;
+        let tempX[3] = -posY[2]+positionX1;
+        let tempY[0] = positionY1;
+        let tempY[1] = posX[0]+positionY1;
+        let tempY[2] = posX[1]+positionY1;
+        let tempY[3] = posX[2]+positionY1;
+
+        if(~BlockGenerator.board_check(tempX[1],tempY[1],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        if(~BlockGenerator.board_check(tempX[2],tempY[2],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        if(~BlockGenerator.board_check(tempX[3],tempY[3],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        
+        if(success){
+            do erase();
+            let positionX2 = tempX[1];
+            let positionX3 = tempX[2];
+            let positionX4 = tempX[3];
+            let positionY2 = tempY[1];
+            let positionY3 = tempY[2];
+            let positionY4 = tempY[3];
+            do draw();
+            let direction = direction + 3;
+            let direction = direction - (direction/4*4);
+            return true;
+        }
+        else{
+            /*
+            let findY = -3;
+            while(findY<0){
+                let success = true;
+                if(~BlockGenerator.board_check(positionX1,positionY1+findY,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+                    {let success = false;}
+                if(~BlockGenerator.board_check(-posY[0]+positionX1,posX[0]+positionY1+findY,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+                    {let success = false;}
+                if(~BlockGenerator.board_check(-posY[1]+positionX1,posX[1]+positionY1+findY,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+                    {let success = false;}
+                if(~BlockGenerator.board_check(-posY[2]+positionX1,posX[2]+positionY1+findY,positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+                    {let success = false;}
+
+                if(success){
+                    do erase();
+                    let positionX2 = -posY[0]+positionX1;
+                    let positionX3 = -posY[1]+positionX1;
+                    let positionX4 = -posY[2]+positionX1;
+                    let positionY1 = positionY1+findY
+                    let positionY2 = posX[0]+positionY1+findY;
+                    let positionY3 = posX[1]+positionY1+findY;
+                    let positionY4 = posX[2]+positionY1+findY;
+                    do draw();
+                    let direction = direction + 3;
+                    let direction = direction - (direction/4*4);
+                    return true;
+                }
+                findY = findY + 1;
+                
+            }
+            */
+            let findX = 1;
+            while((findX < 4)){
+                let success = true;
+                //do Output.printInt(findX);
+                if(~BlockGenerator.board_check(tempX[0]+findX,tempY[0],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[1]+findX,tempY[1],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[2]+findX,tempY[2],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[3]+findX,tempY[3],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(success){
+                    do erase();
+                    let positionX1 = tempX[0]+findX;
+                    let positionX2 = tempX[1]+findX;
+                    let positionX3 = tempX[2]+findX;
+                    let positionX4 = tempX[3]+findX;
+                    let positionY2 = tempY[1];
+                    let positionY3 = tempY[2];
+                    let positionY4 = tempY[3];
+                    do draw();
+                    let direction = direction + 3;
+                    let direction = direction - (direction/4*4);
+                    return true;
+                }
+                if(findX > 0){
+                    let findX = -findX;
+                }else{
+                    let findX = findX - 1;
+                    let findX = -findX;
+                }
+            }
+        }
+        return false;
+    }
+    method boolean turn_right(){
+        var int posX,posY;
+        var boolean success;
+        var int findY,findX;
+        var Array tempX,tempY;
+
+        let tempX = Array.new(4);
+        let tempY = Array.new(4);
+        let success = true;
+        let posX = Array.new(3);
+        let posY = Array.new(3);
+
+        let posX[0] = positionX2 - positionX1;
+        let posX[1] = positionX3 - positionX1;
+        let posX[2] = positionX4 - positionX1;
+        let posY[0] = positionY2 - positionY1;
+        let posY[1] = positionY3 - positionY1;
+        let posY[2] = positionY4 - positionY1;
+
+        let tempX[0] = positionX1;
+        let tempX[1] = posY[0]+positionX1;
+        let tempX[2] = posY[1]+positionX1;
+        let tempX[3] = posY[2]+positionX1;
+        let tempY[0] = positionY1;
+        let tempY[1] = -posX[0]+positionY1;
+        let tempY[2] = -posX[1]+positionY1;
+        let tempY[3] = -posX[2]+positionY1;
+ 
+        if(~BlockGenerator.board_check(tempX[1],tempY[1],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        if(~BlockGenerator.board_check(tempX[2],tempY[2],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        if(~BlockGenerator.board_check(tempX[3],tempY[3],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4))
+            {let success = false;}
+        
+        if(success){
+            do erase();
+            let positionX2 = tempX[1];
+            let positionX3 = tempX[2];
+            let positionX4 = tempX[3];
+            let positionY2 = tempY[1];
+            let positionY3 = tempY[2];
+            let positionY4 = tempY[3];
+            do draw();
+            let direction = direction + 1;
+            let direction = direction - (direction/4*4);
+            return true;
+        }
+        else{
+            let findX = 1;
+            while((findX < 4)){
+                let success = true;
+                //do Output.printInt(findX);
+                if(~BlockGenerator.board_check(tempX[0]-findX,tempY[0],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[1]-findX,tempY[1],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[2]-findX,tempY[2],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(~BlockGenerator.board_check(tempX[3]-findX,tempY[3],positionX1,positionY1,positionX2,positionY2,positionX3,positionY3,positionX4,positionY4)) {let success = false;}
+                if(success){
+                    do erase();
+                    let positionX1 = tempX[0]-findX;
+                    let positionX2 = tempX[1]-findX;
+                    let positionX3 = tempX[2]-findX;
+                    let positionX4 = tempX[3]-findX;
+                    let positionY2 = tempY[1];
+                    let positionY3 = tempY[2];
+                    let positionY4 = tempY[3];
+                    do draw();
+                    let direction = direction + 1;
+                    let direction = direction - (direction/4*4);
+                    return true;
+                }
+                if(findX > 0){
+                    let findX = -findX;
+                }else{
+                    let findX = findX - 1;
+                    let findX = -findX;
+                }
+            }
+        }
+        return false;
+    }
+    method void draw(){ // 一塊大小 15*15
+        do BlockGenerator.put(positionX1,positionY1);
+        do BlockGenerator.put(positionX2,positionY2);
+        do BlockGenerator.put(positionX3,positionY3);
+        do BlockGenerator.put(positionX4,positionY4);
+        return;
+    }
+    method void erase(){ // 一塊大小 15*15
+        do BlockGenerator.remove(positionX1,positionY1);
+        do BlockGenerator.remove(positionX2,positionY2);
+        do BlockGenerator.remove(positionX3,positionY3);
+        do BlockGenerator.remove(positionX4,positionY4);
+        return;
+    }
+    method void decompose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+}

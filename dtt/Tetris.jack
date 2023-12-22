@@ -1,0 +1,150 @@
+class Tetris {
+    static Tetris instance;
+    static boolean in_game;
+    static Block now;
+    static int type;
+    field int I_dont_know_where_to_use_but_I_have_to_put_it_for_the_dumb_memory_error_Arrrrrrrrrrrrrrrrrr;
+
+    constructor Tetris newInstance() {
+        do World.set();
+        do BlockGenerator.set();
+        let instance = this;
+        let now = null;
+        return this;
+    }
+    function void end(){
+        let in_game = false;
+        return;
+    }
+    method void run(){
+        var boolean moveable;
+        var int waitingTime;
+        var int key;
+        let in_game = true;
+        let moveable = true;
+        let waitingTime = 0;
+        do Tetris.generate_block();
+        while(in_game){
+            do World.draw_world();
+            let key = Keyboard.keyPressed();
+            if(key = 140){
+                let in_game = false;
+                return;
+            }
+            if(~moveable){
+                if(key = 0){
+                    let waitingTime = 0;
+                }
+                let waitingTime = waitingTime - 1;
+                if(waitingTime < 0){
+                    let moveable = true;
+                }
+            }
+            //do Output.moveCursor(10,0);
+            //do Output.printInt(key);
+            if(key = 32){
+                while(now.move_down()){}
+                do World.check_line();
+                do Tetris.generate_block();
+                do World.addscore(1);
+            }
+            if((key = 130) & moveable){ // left
+                do now.move_left(1);
+                let moveable = false;
+                let waitingTime = 7; // changable
+            }
+            if((key = 132) & moveable){ // right
+                do now.move_right(1);
+                let moveable = false;
+                let waitingTime = 7; // changable
+            }
+            if((key = 133) & moveable){ // down
+                if(now.move_down()){
+                    let moveable = false;
+                    let waitingTime = 7; // changable
+                }
+                /*
+                else{
+                    do World.check_line();
+                    do Tetris.generate_block();
+                    do World.addscore(1);
+                }*/
+            }
+            if((key = 88) & moveable){ // x
+                if(type = 1){
+                    if(now.get_dir() = 1){
+                        do now.turn_left();
+                        do now.move_right(3);
+                    }
+                    else{
+                        do now.turn_right();
+                    }
+                }
+                
+                if((type = 2) | (type = 3)){
+                    if((now.get_dir() = 0) | (now.get_dir() = 2)){
+                        do now.turn_right();
+                    }
+                    else{
+                        do now.turn_left();
+                    }
+                }  
+                if((type = 4)|(type = 5)|(type = 6)){
+                    do now.turn_right();
+                }
+                
+                
+                let moveable = false;
+                let waitingTime = 7; // changable
+            }
+            if((key = 90) & moveable){ // z
+                if(type = 1){
+                    if(now.get_dir() = 3){
+                        do now.turn_right();
+                        do now.move_left(3);
+                    }
+                    else{
+                        do now.turn_left();
+                    }
+                }
+                
+                if((type = 2) | (type = 3)){
+                    if((now.get_dir() = 0) | (now.get_dir() = 2)){
+                        do now.turn_right();
+                    }
+                    else{
+                        do now.turn_left();
+                    }
+                }
+                    
+                if((type = 4)|(type = 5)|(type = 6)){
+                    do now.turn_left();
+                }
+                
+                    
+                
+                let moveable = false;
+                let waitingTime = 7; // changable
+            }
+        }
+        return;
+    }
+    function void generate_block(){
+        var Block blk;
+        if(~(now = null)){
+            do Memory.deAlloc(now);
+        }
+        let blk = Block.new(BlockGenerator.make_block()); 
+        do blk.draw();
+        let now = blk;
+        let type = blk.get_type();
+        return;
+    }
+    function Tetris getInstance(){
+        return instance;
+    }
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}

@@ -1,0 +1,159 @@
+class World{
+    static Array plate;
+    static int lines , scores;
+    
+    function void set() {
+        var int i,j;
+        var Array temp;
+        do Screen.clearScreen();
+        do Screen.setColor(true);
+        do Screen.drawRectangle(182,0,330,255);
+        do Screen.setColor(false);
+        do Screen.drawRectangle(184,0,328,255);
+        do Output.moveCursor(0,42);
+        do Output.printString("lines:");
+        do Output.moveCursor(1,42);
+        do Output.printString("scores:");
+        let lines = 0;
+        let scores = 0;
+        let plate = Array.new(9);
+        let i = 0;
+        let j = 0;
+        while(i<9){
+            let plate[i] = Array.new(16);
+            let temp = plate[i];
+            while(j<16){
+                let temp[j] = false;
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    function int addscore(int v){
+        let scores = scores + v;
+        return scores;
+    }
+    function void check_line(){
+        var int i, j, ptr;
+        var Array temp;
+        var Array delete;
+        var boolean fini;
+        var boolean ending;
+        let delete = Array.new(16);
+        let j = 0;
+
+        while(j<16){
+            let i = 0;
+            let fini = true;
+            while(i<9){
+                let temp = plate[i];
+                let fini = fini & temp[j];
+                if((j=15)&(temp[j])){
+                    let ending = true;
+                }
+                let i = i + 1;
+            }
+            if(ending){
+                do World.end();
+            }
+            if(fini){
+                let delete[j] = true;
+                let lines = lines + 1;
+                let scores = scores + 5;
+            }
+            else{
+                let delete[j] = false;
+            }
+            let j = j + 1;
+        }
+
+        let ptr = 0;
+        let j = 0;
+        while((j<16)&(ptr<16)){
+            while((delete[ptr] = true) & (ptr<16)){
+                let ptr = ptr + 1;
+            }
+            let i = 0;
+            while((i<9) & (ptr<16)){
+                let temp = plate[i];
+                let temp[j] = temp[ptr];
+                let i = i + 1;
+            }
+            if(ptr<16){
+                let j = j + 1;
+            }
+            let ptr = ptr + 1;
+        }
+        while(j<16){
+            let i = 0;
+            while(i<9){
+                let temp = plate[i];
+                let temp[j] = false;
+                let i = i + 1;
+            }
+            let j = j + 1;
+        }
+        do World.draw_world();
+        do Memory.deAlloc(delete);
+        return;
+    }
+    function void put(int i,int j){
+        var Array temp;
+        let temp = plate[i];
+        let temp[j] = true;
+        return;
+    }
+    function void remove(int i,int j){
+        var Array temp;
+        let temp = plate[i];
+        let temp[j] = false;
+        return;
+    }
+    function boolean board_check(int x,int y,int moveX1,int moveY1,int moveX2,int moveY2,int moveX3,int moveY3,int moveX4,int moveY4){
+        var Array temp;
+        if(x<0){ return false;}
+        if(x>8){ return false;}
+        if(y<0){ return false;}
+        if(y>15){ return false;}
+
+        let temp = plate[x];
+        if((temp[y] = true) & (~((x=moveX1)&(y=moveY1))) & (~((x=moveX2)&(y=moveY2))) & (~((x=moveX3)&(y=moveY3))) & (~((x=moveX4)&(y=moveY4)))){
+            return false;
+        }
+        return true;
+    }
+    function void draw_world(){
+        var int i, j;
+        var Array temp;
+        let i = 0;
+        do Output.moveCursor(0,48);
+        do Output.printInt(lines);
+        do Output.moveCursor(1,49);
+        do Output.printInt(scores);
+        while (i<9) {
+            let temp = plate[i];
+            let j = 0;
+            while (j<16) {
+                do Screen.setColor(temp[j]);
+                do Screen.drawRectangle(184+(i*16)+1, ((15-j)*16)+1, 184 + ((i+1)*16)-2, ((15-j+1)*16)-1);
+               
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    function Array get_plate(int i,int j){
+        var Array temp;
+        let temp = plate[i];
+        return temp[j];
+    }
+    function int get_line(){
+        return lines;
+    }
+    function void end(){
+        do Tetris.end();
+        return;
+    }
+}

@@ -1,0 +1,13 @@
+class Main {
+	static Tetris game;
+    
+    function void main() {
+        let game = Tetris.newInstance();
+        do game.run();
+        do game.dispose();
+        
+        do Output.moveCursor(12,23);
+        do Output.printString("You are terminated!");
+        return;
+    }
+}

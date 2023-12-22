@@ -1,0 +1,298 @@
+class BlockGenerator{
+    static Array plate;
+    static Array height;
+    static Array out;
+    static int last;
+    //static int limit_constant;
+    field int nothing;
+
+    function void set(){
+        var int i;
+        let i = 0;
+        let out = Array.new(7);
+        let height = Array.new(9);
+        let plate = Array.new(9);
+        while(i<7){
+            let out[i] = false;
+            let plate[i] = Array.new(16);
+            let i = i + 1;
+        } 
+        let plate[7] = Array.new(16);
+        let plate[8] = Array.new(16);
+        return;
+    }
+    function void copy_plate(){
+        var int i,j;
+        var Array temp;
+        let i = 0;
+        
+        while(i<9){
+            let j = 0;
+            let temp = plate[i];
+            while(j<16){
+                let temp[j] = World.get_plate(i,j);
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+    function void init(){
+        var int i,j;
+        var int test;
+        var int dif;
+        var Array temp;
+        
+        do BlockGenerator.copy_plate();
+        let i = 0;
+        let test = 0;
+        while(i<7){
+            if(out[i]){
+                let test = test + 1;
+            }
+            let i = i + 1;
+        }
+        let i =0;
+        while(i<9){
+            let temp = plate[i];
+            let j = 0;
+            let height[i] = -1;
+            while(j<16){
+                if(temp[j]){
+                    let height[i] = j;
+                }
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        let i = 0;
+        let dif = BlockGenerator.limit();
+        if(dif<2){
+            let dif = 2;
+        }
+        if(dif>6){
+            let dif = 6;
+        }
+        if(test > (dif/2+1)){
+            while(i<7){
+                let out[i] = false;
+                let i = i + 1;
+            } 
+        }
+        return;
+    }
+    function int limit(){
+        var int i , max;
+        let i = 0;
+        let max = 0;
+        while(i<9){
+            if(max < height[i]){
+                let max = height[i];
+            }
+            let i = i + 1;
+        }
+        return max/2-(World.addscore(0)/Math.max(max*max,1))-World.get_line();
+    }
+    function int make_block(){
+        var int i;
+        var int max;
+        var int idx;
+        var int h,l;
+        let i = 0;
+        let max = -10000;
+        do BlockGenerator.init();
+        while(i<7){
+            if(~out[i]){
+                let l = BlockGenerator.check_line(i);
+                let h = BlockGenerator.get_height(i);
+                if(l*(-100)+h > max){
+                    let max = l*(-100)+h;
+                    let idx = i;
+                }
+            }
+            let i = i + 1;
+        }
+        let out[idx] = true;
+        return idx;
+    }
+    function int get_height(int type){
+        var int x , min;
+        let x = 0;
+        let min = 100;
+        if(type = 0){
+            while(x<8){
+                let min = Math.min(Math.max(height[x],height[x+1]) + 2,min);
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 1){
+            while(x<6){
+                let min = Math.min(min,Math.max(Math.max(height[x],height[x+1]),Math.max(height[x+2],height[x+3])) + 1);
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<9){
+                let min = Math.min(min,height[x]+4);
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 2){
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+2,height[x+1]+3));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<7){
+                let min = Math.min(min,Math.max(Math.max(height[x]+2,height[x+1]+2),height[x+2]+1));
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 3){
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+3,height[x+1]+2));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<7){
+                let min = Math.min(min,Math.max(Math.max(height[x]+1,height[x+1]+2),height[x+2]+2));
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 4){
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+1,height[x+1]+3));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<7){
+                let min = Math.min(min,Math.max(Math.max(height[x]+2,height[x+1]+1),height[x+2]+1));
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 5){
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+3,height[x+1]+1));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<7){
+                let min = Math.min(min,Math.max(Math.max(height[x]+1,height[x+1]+1),height[x+2]+2));
+                let x = x + 1;
+            }
+            return min;
+        }
+        if(type = 6){
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+3,height[x+1]+2));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<8){
+                let min = Math.min(min,Math.max(height[x]+2,height[x+1]+3));
+                let x = x + 1;
+            }
+            let x = 0;
+            while(x<7){
+                let min = Math.min(min,Math.max(Math.max(height[x]+1,height[x+1]+2),height[x+2]+1));
+                let x = x + 1;
+            }
+            return min;
+        }
+        return 0;
+    }
+
+    function int check_line(int type){
+        var FakeBlock fblk;
+        var int max ,left ,turn, i;
+        let max = 0;
+        let left = 1;
+        let turn = 0;
+        while(turn<4){
+            while(left<5){
+                let fblk = FakeBlock.new(type);
+                do fblk.draw();
+                let i = turn;
+                while(i>0){
+                    do fblk.turn_left();
+                    let i = i -1;
+                }
+                if(fblk.move_left(left)){
+                    while(fblk.move_down()){}
+                    let max = Math.max(max,BlockGenerator.clean_line());
+                    do fblk.erase();
+                }
+                do fblk.decompose();
+
+                let fblk = FakeBlock.new(type);
+                do fblk.draw();
+                let i = turn;
+                while(i>0){
+                    do fblk.turn_left();
+                    let i = i -1;
+                }
+                if(fblk.move_right(left)){
+                    while(fblk.move_down()){}
+                    let max = Math.max(max,BlockGenerator.clean_line());
+                }
+                do fblk.decompose();
+                let left = left + 1;
+            }
+            let turn = turn + 1;
+        }
+        return max;
+    }
+    function int clean_line(){
+        var int i, j, cnt;
+        var Array temp;
+        //var Array delete;
+        var boolean fini;
+        let cnt = 0;
+        let j = 0;
+
+        while(j<16){
+            let i = 0;
+            let fini = true;
+            while(i<9){
+                let temp = plate[i];
+                let fini = fini & temp[j];
+                let i = i + 1;
+            }
+            if(fini){
+                let cnt = cnt + 1;
+            }
+            let j = j + 1;
+        }
+        return cnt;
+    }
+    function void put(int i,int j){
+        var Array temp;
+        let temp = plate[i];
+        let temp[j] = true;
+        return;
+    }
+    function void remove(int i,int j){
+        var Array temp;
+        let temp = plate[i];
+        let temp[j] = false;
+        return;
+    }
+    function boolean board_check(int x,int y,int moveX1,int moveY1,int moveX2,int moveY2,int moveX3,int moveY3,int moveX4,int moveY4){
+        var Array temp;
+        if(x<0){ return false;}
+        if(x>8){ return false;}
+        if(y<0){ return false;}
+        if(y>15){ return false;}
+
+        let temp = plate[x];
+        if((temp[y] = true) & (~((x=moveX1)&(y=moveY1))) & (~((x=moveX2)&(y=moveY2))) & (~((x=moveX3)&(y=moveY3))) & (~((x=moveX4)&(y=moveY4)))){
+            return false;
+        }
+        return true;
+    }
+    
+}
