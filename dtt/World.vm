@@ -71,8 +71,6 @@ call Array.new 1
 pop static 0
 push constant 0
 pop local 0
-push constant 0
-pop local 1
 label WHILE_EXP0
 push local 0
 push constant 9
@@ -82,7 +80,7 @@ if-goto WHILE_END0
 push local 0
 push static 0
 add
-push constant 16
+push constant 20
 call Array.new 1
 pop temp 0
 pop pointer 1
@@ -94,9 +92,11 @@ add
 pop pointer 1
 push that 0
 pop local 2
+push constant 0
+pop local 1
 label WHILE_EXP1
 push local 1
-push constant 16
+push constant 20
 lt
 not
 if-goto WHILE_END1
@@ -432,7 +432,7 @@ push constant 0
 return
 label IF_FALSE2
 push argument 1
-push constant 15
+push constant 20
 gt
 if-goto IF_TRUE3
 goto IF_FALSE3

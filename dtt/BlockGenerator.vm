@@ -27,7 +27,7 @@ pop that 0
 push local 0
 push static 0
 add
-push constant 16
+push constant 20
 call Array.new 1
 pop temp 0
 pop pointer 1
@@ -42,7 +42,7 @@ label WHILE_END0
 push constant 7
 push static 0
 add
-push constant 16
+push constant 20
 call Array.new 1
 pop temp 0
 pop pointer 1
@@ -51,7 +51,7 @@ pop that 0
 push constant 8
 push static 0
 add
-push constant 16
+push constant 20
 call Array.new 1
 pop temp 0
 pop pointer 1
@@ -78,7 +78,7 @@ push that 0
 pop local 2
 label WHILE_EXP1
 push local 1
-push constant 16
+push constant 20
 lt
 not
 if-goto WHILE_END1
@@ -203,12 +203,12 @@ pop local 0
 call BlockGenerator.limit 0
 pop local 3
 push local 3
-push constant 2
+push constant 3
 lt
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
-push constant 2
+push constant 3
 pop local 3
 label IF_FALSE2
 push local 3
@@ -1201,7 +1201,7 @@ push constant 0
 return
 label IF_FALSE2
 push argument 1
-push constant 15
+push constant 20
 gt
 if-goto IF_TRUE3
 goto IF_FALSE3

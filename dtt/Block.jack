@@ -11,73 +11,73 @@ class Block{
         let types = type;
         if(type = 0){ //O
             let positionX1 = 4;
-            let positionY1 = 14;
+            let positionY1 = 15;
             let positionX2 = 5;
-            let positionY2 = 14;
+            let positionY2 = 15;
             let positionX3 = 4;
-            let positionY3 = 15;
+            let positionY3 = 16;
             let positionX4 = 5;
-            let positionY4 = 15;
+            let positionY4 = 16;
         }
         if(type = 1){ //I
             let positionX1 = 4;
-            let positionY1 = 12;
+            let positionY1 = 15;
             let positionX2 = 4;
-            let positionY2 = 13;
+            let positionY2 = 16;
             let positionX3 = 4;
-            let positionY3 = 14;
+            let positionY3 = 17;
             let positionX4 = 4;
-            let positionY4 = 15;
+            let positionY4 = 18;
         }
         if(type = 2){ //S
             let positionX1 = 4;
-            let positionY1 = 14;
+            let positionY1 = 15;
             let positionX2 = 3;
-            let positionY2 = 14;
+            let positionY2 = 15;
             let positionX3 = 4;
-            let positionY3 = 15;
+            let positionY3 = 16;
             let positionX4 = 5;
-            let positionY4 = 15;
+            let positionY4 = 16;
         }
         if(type = 3){ //Z
             let positionX1 = 4;
-            let positionY1 = 14;
+            let positionY1 = 15;
             let positionX2 = 3;
-            let positionY2 = 15;
+            let positionY2 = 16;
             let positionX3 = 4;
-            let positionY3 = 15;
+            let positionY3 = 16;
             let positionX4 = 5;
-            let positionY4 = 14;
+            let positionY4 = 15;
         }
         if(type = 4){ //L
             let positionX1 = 4;
-            let positionY1 = 14;
+            let positionY1 = 16;
             let positionX2 = 4;
-            let positionY2 = 13;
+            let positionY2 = 15;
             let positionX3 = 4;
-            let positionY3 = 15;
+            let positionY3 = 17;
             let positionX4 = 5;
-            let positionY4 = 13;
+            let positionY4 = 15;
         }
         if(type = 5){ //J
             let positionX1 = 4;
-            let positionY1 = 14;
+            let positionY1 = 16;
             let positionX2 = 4;
-            let positionY2 = 13;
+            let positionY2 = 15;
             let positionX3 = 4;
-            let positionY3 = 15;
+            let positionY3 = 17;
             let positionX4 = 3;
-            let positionY4 = 13;
+            let positionY4 = 15;
         }
         if(type = 6){ //T
             let positionX1 = 5;
-            let positionY1 = 14;
+            let positionY1 = 15;
             let positionX2 = 4;
-            let positionY2 = 15;
+            let positionY2 = 16;
             let positionX3 = 5;
-            let positionY3 = 15;
+            let positionY3 = 16;
             let positionX4 = 6;
-            let positionY4 = 15;
+            let positionY4 = 16;
         }
         return this;
     }

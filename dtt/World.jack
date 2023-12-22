@@ -17,12 +17,12 @@ class World{
         let lines = 0;
         let scores = 0;
         let plate = Array.new(9);
-        let i = 0;
-        let j = 0;
+        let i = 0; 
         while(i<9){
-            let plate[i] = Array.new(16);
+            let plate[i] = Array.new(20);
             let temp = plate[i];
-            while(j<16){
+            let j = 0;
+            while(j<20){
                 let temp[j] = false;
                 let j = j + 1;
             }
@@ -115,7 +115,7 @@ class World{
         if(x<0){ return false;}
         if(x>8){ return false;}
         if(y<0){ return false;}
-        if(y>15){ return false;}
+        if(y>20){ return false;}
 
         let temp = plate[x];
         if((temp[y] = true) & (~((x=moveX1)&(y=moveY1))) & (~((x=moveX2)&(y=moveY2))) & (~((x=moveX3)&(y=moveY3))) & (~((x=moveX4)&(y=moveY4)))){
@@ -136,6 +136,18 @@ class World{
             let j = 0;
             while (j<16) {
                 do Screen.setColor(temp[j]);
+                /*
+                do Output.printInt(j);
+                do Output.println();
+                do Output.printInt(184+(i*16)+1);
+                do Output.printString(",");
+                do Output.printInt(((15-j)*16)+1);
+                do Output.printString(",");
+                do Output.printInt(184 + ((i+1)*16)-2);
+                do Output.printString(",");
+                do Output.printInt(((15-j+1)*16)-1);
+                //do Output.println();
+                */
                 do Screen.drawRectangle(184+(i*16)+1, ((15-j)*16)+1, 184 + ((i+1)*16)-2, ((15-j+1)*16)-1);
                
                 let j = j + 1;

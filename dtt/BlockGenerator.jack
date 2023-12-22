@@ -14,11 +14,11 @@ class BlockGenerator{
         let plate = Array.new(9);
         while(i<7){
             let out[i] = false;
-            let plate[i] = Array.new(16);
+            let plate[i] = Array.new(20);
             let i = i + 1;
         } 
-        let plate[7] = Array.new(16);
-        let plate[8] = Array.new(16);
+        let plate[7] = Array.new(20);
+        let plate[8] = Array.new(20);
         return;
     }
     function void copy_plate(){
@@ -29,7 +29,7 @@ class BlockGenerator{
         while(i<9){
             let j = 0;
             let temp = plate[i];
-            while(j<16){
+            while(j<20){
                 let temp[j] = World.get_plate(i,j);
                 let j = j + 1;
             }
@@ -67,8 +67,8 @@ class BlockGenerator{
         }
         let i = 0;
         let dif = BlockGenerator.limit();
-        if(dif<2){
-            let dif = 2;
+        if(dif<3){
+            let dif = 3;
         }
         if(dif>6){
             let dif = 6;
@@ -286,7 +286,7 @@ class BlockGenerator{
         if(x<0){ return false;}
         if(x>8){ return false;}
         if(y<0){ return false;}
-        if(y>15){ return false;}
+        if(y>20){ return false;}
 
         let temp = plate[x];
         if((temp[y] = true) & (~((x=moveX1)&(y=moveY1))) & (~((x=moveX2)&(y=moveY2))) & (~((x=moveX3)&(y=moveY3))) & (~((x=moveX4)&(y=moveY4)))){
