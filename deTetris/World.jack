@@ -11,9 +11,18 @@ class World{
         do Screen.setColor(false);
         do Screen.drawRectangle(184,0,328,255);
         do Output.moveCursor(0,42);
-        do Output.printString("lines:");
-        do Output.moveCursor(1,42);
-        do Output.printString("scores:");
+        do Output.printString("LINES:");
+        do Output.moveCursor(2,42);
+        do Output.printString("SCORES:");
+        do Output.moveCursor(4,0);
+        do Output.printString("USE ARROR KEYS TO MOVE");
+        do Output.moveCursor(6,0);
+        do Output.printString("USE X , Z TO TURN");
+        do Output.moveCursor(8,0);
+        do Output.printString("SPACE TO HARD DROP");
+        do Output.moveCursor(10,0);
+        do Output.printString("PRESS ESC TO EXIT");
+        
         let lines = 0;
         let scores = 0;
         let plate = Array.new(9);
@@ -129,25 +138,13 @@ class World{
         let i = 0;
         do Output.moveCursor(0,48);
         do Output.printInt(lines);
-        do Output.moveCursor(1,49);
+        do Output.moveCursor(2,49);
         do Output.printInt(scores);
         while (i<9) {
             let temp = plate[i];
             let j = 0;
             while (j<16) {
                 do Screen.setColor(temp[j]);
-                /*
-                do Output.printInt(j);
-                do Output.println();
-                do Output.printInt(184+(i*16)+1);
-                do Output.printString(",");
-                do Output.printInt(((15-j)*16)+1);
-                do Output.printString(",");
-                do Output.printInt(184 + ((i+1)*16)-2);
-                do Output.printString(",");
-                do Output.printInt(((15-j+1)*16)-1);
-                //do Output.println();
-                */
                 do Screen.drawRectangle(184+(i*16)+1, ((15-j)*16)+1, 184 + ((i+1)*16)-2, ((15-j+1)*16)-1);
                
                 let j = j + 1;
